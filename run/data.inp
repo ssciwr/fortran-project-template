@@ -1,0 +1,7 @@
+$start
+  matdim=3             'dimension of matrices and vectors
+  matval=1.568000      'value to be used to fill the matrices and vectors
+  do_diag=True         'Logical to determine if matrices are to be diagonalized
+$end
+
+

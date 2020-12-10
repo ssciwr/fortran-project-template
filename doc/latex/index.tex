@@ -1,0 +1,26 @@
+
+\begin{DoxyItemize}
+\item Name and short description of the software, authors, date of initial development
+\item Main features
+\item Main requirements
+\item Further information\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{a00029}{Input examples and explanations, step-\/by-\/step tutorial}}
+\item \mbox{\hyperlink{a00030}{More detailed description of scientific approach and input variables reference}}
+\item \mbox{\hyperlink{a00031}{Validity range of the parameters}}
+\item \mbox{\hyperlink{a00028}{License, bug tracker, references, citations}}
+\item Source code description -\/ functions and classes, modules, variables
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{index_autotoc_md1}{}\doxysection{fortran-\/project-\/template}\label{index_autotoc_md1}
+This is a template for your software project. The example code performs a matrix-\/vector multiplication for real and complex matrices/vectors, and a matrix diagonalization routine per the respective L\+A\+P\+A\+CK routines.
+
+{\itshape Scientific Software Center, Heidelberg University, 12/2020}
+
+The program requires B\+L\+A\+S/\+L\+A\+P\+A\+CK libraries and doxygen/graphviz for the documentation. Compile the source code with {\ttfamily make} in the {\ttfamily ./build} directory. This will place the compiled program in {\ttfamily ./bin}. The input parameters are contained in {\ttfamily run/data.\+inp} and output is written to {\ttfamily data.\+out}. To execute the program, cd into the {\ttfamily run} directory and execute {\ttfamily ../bin/sample\+\_\+program}.\hypertarget{index_autotoc_md2}{}\doxysubsection{github actions}\label{index_autotoc_md2}
+This repository contains a github action in `./github/workflows/'. This will run unit tests and update the documentation upon push to the master branch and upon pull request. The action can also be run manually in the \char`\"{}\+Actions\char`\"{} tab on the github website.\hypertarget{index_autotoc_md3}{}\doxysubsubsection{Testing}\label{index_autotoc_md3}
+You should always test your code against a reference. In this template, we used {\ttfamily funit} for the unit tests.
+
+So far, only {\itshape unit tests} are included in the code template (that is, tests of a specific component of the software), but as you develop your software, you should also add {\ttfamily integration tests} that check the overall behaviour of your code.
+
+In the github action, the tests are performed under ubuntu, windows and mac operating systems to ensure that the code runs in different environments. Also, two different python versions are tested right now, 3.\+7 and 3.\+8.\hypertarget{index_autotoc_md4}{}\doxysubsubsection{Source Code Documentation\+: Functions, modules, classes, ...}\label{index_autotoc_md4}
+The documentation should be updated as you update your code. Include appropriate method descriptions in your code and running {\ttfamily doxygen} in the {\ttfamily doc} directory will update the documentation html for your functions, classes, etc. On your local machine, you can navigate to {\ttfamily doc/index.\+html} and check the styling. If your code is in a public repository, you can push your documentation to \href{https://readthedocs.org/}{\texttt{ Read the docs}} or github pages. 
