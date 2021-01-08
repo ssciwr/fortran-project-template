@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+#Documentation files
+./doc/html/
+./doc/latex/
+
+

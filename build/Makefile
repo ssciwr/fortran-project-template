@@ -16,8 +16,13 @@ OBJ = generic_data.o input_output.o transform.o main.o
 all:	$(OBJ)
 	$(CC) -o $(BINDIR)/sample_program $(OBJ) $(LINK_FLAGS) 
 
+lib: libsut.a
+
+libsut.a: $(OBJ)
+	$(AR) -r $@ $?
+
 clean:
-	rm -f *.o *.mod
+	rm -f *.o *.mod *.inc *.a
 
 %.o:	$(SRCDIR)/%.f90
 	$(CC) $(CFLAGS)  $<
