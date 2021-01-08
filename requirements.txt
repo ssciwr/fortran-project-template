@@ -6,5 +6,4 @@ cd build
 cmake .. -DSKIP_MPI=yes -DSKIP_OPENMP=yes
 make tests
 make install
-put fortran compiler in bashrc
 
