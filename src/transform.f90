@@ -29,12 +29,13 @@
 
   real_vector(:)= 1.0_dp
   complex_vector(:)= cr
+
 ! set real_matrix and complex_matrix as the identity matrix
   forall(i=1:matdim, j=1:matdim) real_matrix(i,j) = (i/j)*(j/i)
   forall(i=1:matdim, j=1:matdim) complex_matrix(i,j) = (i/j)*(j/i)
 ! set diagonal entries to matval/i*matval instead of 1  
-  real_matrix(:,:)=real_matrix*matval
-  complex_matrix(:,:)=complex_matrix*ci*matval
+  real_matrix(:,:)=real_matrix(:,:)*matval
+  complex_matrix(:,:)=complex_matrix(:,:)*ci*matval
 
   trans = 'N'
   call dgemv(trans,matdim,matdim,alpha,real_matrix,matdim,real_vector,1,beta,work,1)
