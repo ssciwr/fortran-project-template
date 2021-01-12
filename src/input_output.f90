@@ -84,12 +84,12 @@
 
   do i=1,matdim
     do j=1,matdim
-      write(21,outformat1) real_matrix(i,j)
+      write(21,outformat1) real_matrix(j,i)
     enddo
   enddo
   do i=1,matdim
     do j=1,matdim
-      write(21,outformat2) complex_matrix(i,j)
+      write(21,outformat2) complex_matrix(j,i)
     enddo
   enddo
   if(do_diag) then

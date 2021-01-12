@@ -1,18 +1,104 @@
   module test_transform
+  use globalvars
+  use transformations
   use funit
 
   contains
 
+  @before
+  subroutine set_up()
+
+  matdim = 3
+  matval = 0.75
+
+  allocate(real_matrix(matdim,matdim))
+  allocate(complex_matrix(matdim,matdim))
+  allocate(real_vector(matdim))
+  allocate(complex_vector(matdim))
+    
+  end subroutine set_up  
+
+  @after
+  subroutine tear_down()
+
+  deallocate(real_matrix)
+  deallocate(complex_matrix)
+  deallocate(real_vector)
+  deallocate(complex_vector)
+   
+  end subroutine tear_down
+
+
   @test
-
   subroutine test_matrix_vector()
-   use funit
+  real(dp),dimension(3,3)     :: rm
+  complex(dp),dimension(3,3)  :: cm
+  integer                     :: i,j
 
 
-  @assertEqual(1.0, 1.0, 'real matrix')
+  forall(i=1:matdim, j=1:matdim) rm(i,j) = (i/j)*(j/i)
+  forall(i=1:matdim, j=1:matdim) cm(i,j) = (i/j)*(j/i)
 
+  rm(:,:)=rm(:,:)*matval
+  cm(:,:)=cm(:,:)*ci*matval
 
+  call matrix_vector()
+
+  @assertEqual(rm, real_matrix, 'real matrix')
+  @assertEqual(dreal(cm), dreal(complex_matrix), 'complex matrix - real part')
+  @assertEqual(dimag(cm), dimag(complex_matrix), 'complex matrix - imaginary part')
 
   end subroutine test_matrix_vector
 
-  end module test_transform
+  @test
+  subroutine test_diag_matrix()
+  real(dp),dimension(3,3)     :: drm
+  real(dp),dimension(3)       :: rv
+  complex(dp),dimension(3,3)  :: dcm
+  complex(dp),dimension(3)    :: cv
+  integer                     :: i,j,io_stat
+  character(len=50)           :: outformat1,outformat2
+  real(dp)                    :: tol
+
+  outformat1='(e23.16)'
+  outformat2='(2(e23.16,2X))'
+  tol = 1.0e-7
+
+  real_matrix(:,:) = matval
+  complex_matrix(:,:) = matval*cr
+
+! read in reference from data.out
+  open(20,file='data.out',action='read',iostat=io_stat)
+  if(io_stat.ne.0) then
+    write(*,*) "Failed to read in reference data from data.out!"
+    stop
+  endif
+  do i=1,3
+    do j=1,3
+      read(20,outformat1) drm(j,i)
+    enddo
+  enddo
+  do i=1,3
+    do j=1,3
+      read(20,outformat2) dcm(j,i)
+    enddo
+  enddo
+  do i=1,3
+    read(20,outformat1) rv(i)
+  enddo
+  do i=1,3
+    read(20,outformat2) cv(i)
+  enddo
+
+  call diag_matrix()
+  @assertEqual(drm, real_matrix, tolerance=tol, message='real matrix')
+  @assertEqual(dreal(dcm), dreal(complex_matrix), tolerance=tol, message='complex matrix - real part')
+  @assertEqual(dimag(dcm), dimag(complex_matrix), tolerance=tol, message='complex matrix - imaginary part')
+  @assertEqual(rv, real_vector, tolerance=tol, message='real vector')
+  @assertEqual(dreal(cv), dreal(complex_vector), tolerance=tol, message='complex vector - real part')
+  @assertEqual(dimag(cv), dimag(complex_vector), tolerance=tol, message='complex vector - imaginary part')
+
+  end subroutine test_diag_matrix
+
+
+  end module
