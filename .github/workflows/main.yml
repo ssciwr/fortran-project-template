@@ -28,9 +28,17 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install gfortran libblas-dev liblapack-dev m4
+        git clone https://github.com/Goddard-Fortran-Ecosystem/pFUnit.git
+    - name: Build pFUnit
+      run: |
+          cd pFUnit
+          mkdir build
+          cd build
+          cmake .. -DSKIP_MPI=yes -DSKIP_OPENMP=yes
+          make tests
+          make install
     - name: Compile main program
       run: |
-        cd build
         make
 #    - name: Run unittest
 #      run: |
