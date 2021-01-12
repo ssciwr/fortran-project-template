@@ -40,9 +40,11 @@ jobs:
           cd build
           cmake .. -DSKIP_MPI=yes -DSKIP_OPENMP=yes -DCMAKE_Fortran_COMPILER=${FC}
           make
+          pwd
     - name: Compile main program
       run: |
-        make
+        pwd
+        make PFUNIT_DIR=./pFUnit/build/installed/
 #    - name: Run unittest
 #      run: |
 #        cd src
