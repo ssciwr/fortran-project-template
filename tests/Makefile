@@ -15,10 +15,6 @@ debug: unit_test
 %.o : %.F90
 	$(FC) -c $(FFLAGS) $<
 
-# debug options for gfortran
-debug: FFLAGS += -O0 -c -g -Wline-truncation -Wall -fbacktrace -ffpe-trap=zero,overflow,underflow -fbounds-check
-debug: unit_test
-
 unit_test_TESTS := test_transform.pf
 unit_test_OTHER_LIBRARIES := -L../build -lsut -llapack -lblas
 $(eval $(call make_pfunit_test,unit_test))
