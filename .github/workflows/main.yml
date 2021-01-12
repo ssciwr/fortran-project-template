@@ -45,7 +45,7 @@ jobs:
       run: |
         gfortran -v
         make FC=${FC}
-     - name: Run unittest
-       run: |
-         cd tests
-         ./unit_test
+    - name: Run unittest
+      run: |
+        cd tests
+        ./unit_test
