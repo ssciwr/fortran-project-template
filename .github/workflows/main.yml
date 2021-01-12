@@ -22,6 +22,9 @@ jobs:
       matrix:
 #        os: [ubuntu-18.04, macos-10.15, windows-2019]
         os: [ubuntu-18.04 ]
+        compiler: [gfortran-9]
+    env:
+      FC: ${{ matrix.compiler }}
     steps:
     - name: Getting repository
       uses: actions/checkout@v2
@@ -34,9 +37,9 @@ jobs:
           cd pFUnit
           mkdir build
           cd build
-          cmake .. -DSKIP_MPI=yes -DSKIP_OPENMP=yes
-          make tests
-          make install
+          cmake .. -DSKIP_MPI=yes -DSKIP_OPENMP=yes -DCMAKE_Fortran_COMPILER=${FC}
+          make
+          cd ../..
     - name: Compile main program
       run: |
         make
