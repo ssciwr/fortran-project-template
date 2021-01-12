@@ -6,7 +6,7 @@ include $(LATEST_PFUNIT_DIR)/include/PFUNIT.mk
 all: unit_test
 
 FFLAGS += $(PFUNIT_EXTRA_FFLAGS)
-FFLAGS += -I../src 
+FFLAGS += -I../build 
 
 # debug options for gfortran
 debug: FFLAGS += -O0 -c -g -Wline-truncation -Wall -fbacktrace -ffpe-trap=zero,overflow,underflow -fbounds-check
