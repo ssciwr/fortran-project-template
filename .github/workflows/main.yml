@@ -32,7 +32,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get install gfortran libblas-dev liblapack-dev m4
-        git clone https://github.com/Goddard-Fortran-Ecosystem/pFUnit.git
+        git clone -b v4.1.15 https://github.com/Goddard-Fortran-Ecosystem/pFUnit.git
     - name: Build pFUnit
       run: |
           cd pFUnit
