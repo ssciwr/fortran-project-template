@@ -40,7 +40,7 @@ jobs:
           cd build
           gfortran -v
           cmake .. -DSKIP_MPI=yes -DSKIP_OPENMP=yes -DCMAKE_Fortran_COMPILER=${FC}
-          make install
+          make install -j2
     - name: Compile main program
       run: |
         gfortran -v
