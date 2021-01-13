@@ -16,20 +16,20 @@ This is a template for your software project. The example code performs a matrix
 
 *Scientific Software Center, Heidelberg University, 12/2020*
 
-The program requires a fortran compiler, BLAS/LAPACK libraries, doxygen/graphviz for the documentation, and Ruby with the RubyGems package manager to install funit, which is used for the unit testing. To install these on i.e. ubuntu, type `source requirements.txt`.
+The program requires a fortran compiler, BLAS/LAPACK libraries, doxygen/graphviz for the documentation, and pFUnit, which is used for the unit testing. To install these on i.e. ubuntu, type `source requirements.txt`.
 
-Compile the source code with `make` in the `./build` directory. This will place the compiled program in `./bin`. The input parameters are contained in `run/data.inp` and output is written to `data.out`. To execute the program, cd into the `run` directory and execute `../bin/sample_program`.
+Compile the source code with `make` in the main directory. This will place the compiled program in `./bin` and also compile the unit tests which are contained in the folder `./tests`. The input parameters are contained in `run/data.inp` and output is written to `data.out`. To execute the program, cd into the `run` directory and execute `../bin/sample_program`.
 
 ## github actions
 
-This repository contains a github action in `./github/workflows/'. This will run unit tests and update the documentation upon push to the master branch and upon pull request. The action can also be run manually in the "Actions" tab on the github website.
+This repository contains a github action in `./github/workflows/`. This will run unit tests upon push to the master branch and upon pull request. The action can also be run manually in the "Actions" tab on the github website.
 
 ### Testing
-You should always test your code against a reference. In this template, we used `funit` for the unit tests.
+You should always test your code against a reference. In this template, we used [https://github.com/Goddard-Fortran-Ecosystem/pFUnit](`pFUnit`) for the unit tests (parallel funit).
 
 So far, only *unit tests* are included in the code template (that is, tests of a specific component of the software), but as you develop your software, you should also add `integration tests` that check the overall behaviour of your code.
 
-In the github action, the tests are performed under ubuntu, windows and mac operating systems to ensure that the code runs in different environments. Also, two different python versions are tested right now, 3.7 and 3.8.
+In the github action, the tests are performed under the ubuntu operating system, ideally you would ensure that the code runs also on other operating systems.
 
 ### Source Code Documentation: Functions, modules, classes, ...
 The documentation should be updated as you update your code. Include appropriate method descriptions in your code and running `doxygen` in the `doc` directory will update the documentation html for your functions, classes, etc. On your local machine, you can navigate to `doc/index.html` and check the styling.
