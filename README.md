@@ -25,7 +25,7 @@ Compile the source code with `make` in the main directory. This will place the c
 This repository contains a github action in `./github/workflows/`. This will run unit tests upon push to the master branch and upon pull request. The action can also be run manually in the "Actions" tab on the github website.
 
 ### Testing
-You should always test your code against a reference. In this template, we used [https://github.com/Goddard-Fortran-Ecosystem/pFUnit](pFUnit) for the unit tests (parallel funit).
+You should always test your code against a reference. In this template, we use [pFUnit] (https://github.com/Goddard-Fortran-Ecosystem/pFUnit) for the unit tests (parallel funit).
 
 So far, only *unit tests* are included in the code template (that is, tests of a specific component of the software), but as you develop your software, you should also add `integration tests` that check the overall behaviour of your code.
 
