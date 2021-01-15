@@ -28,7 +28,7 @@
 
 # Executables
 *.exe
-*.out
+run/*.out
 *.app
 
 #Documentation files

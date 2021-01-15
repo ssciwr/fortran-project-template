@@ -1,12 +1,12 @@
 FC = gfortran
-PFUNIT_DIR := /home/inga/programs/pFUnit/build/installed/
+PFUNIT_DIR := ../pFUnit/build/installed/
 LATEST_PFUNIT_DIR := $(lastword $(shell echo $(wildcard $(PFUNIT_DIR)/PFUNIT-4.*) | xargs -n1 | sort -V))
 include $(LATEST_PFUNIT_DIR)/include/PFUNIT.mk
 
 all: unit_test
 
 FFLAGS += $(PFUNIT_EXTRA_FFLAGS)
-FFLAGS += -I../src 
+FFLAGS += -I../build 
 
 # debug options for gfortran
 debug: FFLAGS += -O0 -c -g -Wline-truncation -Wall -fbacktrace -ffpe-trap=zero,overflow,underflow -fbounds-check
@@ -14,10 +14,6 @@ debug: unit_test
 
 %.o : %.F90
 	$(FC) -c $(FFLAGS) $<
-
-# debug options for gfortran
-debug: FFLAGS += -O0 -c -g -Wline-truncation -Wall -fbacktrace -ffpe-trap=zero,overflow,underflow -fbounds-check
-debug: unit_test
 
 unit_test_TESTS := test_transform.pf
 unit_test_OTHER_LIBRARIES := -L../build -lsut -llapack -lblas
